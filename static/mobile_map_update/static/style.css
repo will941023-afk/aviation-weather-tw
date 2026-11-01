@@ -1,0 +1,63 @@
+:root{color-scheme:dark;font-family:system-ui,-apple-system,'Noto Sans TC',sans-serif;background:#0b1220;color:#e7eefb}*{box-sizing:border-box}body{margin:0}header{background:linear-gradient(110deg,#152d52,#0b1220);padding:28px 0}h1{margin:0;font-size:clamp(22px,4vw,34px)}header p,.note,footer{color:#aebdd2}.wrap{max-width:1100px;margin:auto;padding:0 18px}main{padding-top:20px!important;padding-bottom:40px!important}.panel{background:#152137;border:1px solid #30415e;border-radius:14px;padding:18px;margin:16px 0}select,button{background:#223958;color:white;border:1px solid #52749c;border-radius:8px;padding:11px;margin:8px;cursor:pointer}button{background:#2872b5}#status{font-size:13px;color:#b4d5ef}#map{height:390px;border-radius:14px;overflow:hidden;border:1px solid #30415e}.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.metric{background:#20314b;padding:14px;border-radius:10px}.metric small{display:block;color:#aebdd2}.metric strong{font-size:21px}pre{white-space:pre-wrap;word-break:break-word;background:#0c1728;padding:12px;border-radius:8px}.group{border-left:3px solid #4c9ee5;padding:8px 14px;margin:10px 0;background:#1b2c43}.warn{color:#ffd07e}.ok{color:#9ae2b2}h2,h3{margin-top:22px}footer{text-align:center;padding:20px;font-size:12px} .leaflet-container{background:#dce7ed}
+
+#map{height:auto;max-width:650px;margin:0 auto;background:#0b2438}#map svg{display:block;width:100%;height:auto;max-height:630px}.airport-pin{cursor:pointer;outline:none}.airport-pin:hover circle:first-child,.airport-pin:focus circle:first-child,.airport-pin.active circle:first-child{stroke:#ffd46c;stroke-width:4}.airport-pin:focus{filter:drop-shadow(0 0 5px #fff)}.aircraft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:12px}.aircraft-card{background:#20314b;border:1px solid #3b5776;border-radius:12px;padding:15px}.aircraft-card h4{margin:0;font-size:17px}.aircraft-card p{line-height:1.65;font-size:14px}.aircraft-card small{color:#aebdd2}.aircraft-head{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:start}.undetermined{font-size:12px;color:#f8d797;background:#564725;padding:4px 7px;border-radius:6px}.note{line-height:1.65}
+
+/* Fixed Taiwan map — no pan/zoom controls or online map tiles */
+#map{width:100%;max-width:860px;margin:0 auto;height:auto;overflow:hidden;touch-action:pan-y}
+#map svg{display:block;width:100%;height:auto;max-height:none}
+.map-grid{stroke:#2c526b;stroke-width:.7;opacity:.38;stroke-dasharray:3 8}
+.map-land{fill:#317d71;stroke:#b9d8ae;stroke-width:2.4;stroke-linejoin:round}
+.map-island{fill:#428d7b;stroke:#a9d1ad;stroke-width:1.6}
+.map-island-dot{fill:#428d7b}
+.airport-pin{cursor:pointer;outline:none}
+.pin-hit{fill:transparent;stroke:none}
+.pin-ring{fill:#10364d;stroke:#7fe4f0;stroke-width:2.4}
+.pin-center{fill:#e6faff}
+.airport-label{fill:#f0f8ff;font-size:12px;font-weight:600;paint-order:stroke;stroke:#0c2a40;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.airport-pin:hover .pin-ring,.airport-pin:focus .pin-ring,.airport-pin.active .pin-ring{stroke:#ffd56c;stroke-width:4}
+.airport-pin:hover .airport-label,.airport-pin:focus .airport-label,.airport-pin.active .airport-label{fill:#ffdc83}
+@media(max-width:650px){.airport-label{font-size:13px}}
+
+/* Satellite map V4: fixed real imagery with accessible airport markers */
+#map{height:610px;max-width:none;width:100%;background:#10283b;touch-action:pan-y}
+#map.leaflet-container{background:#10283b}
+#map .leaflet-control-attribution{font-size:10px;background:rgba(5,15,25,.82);color:#dcecff}
+#map .leaflet-control-attribution a{color:#a6dfff}
+.aviation-airport-icon{background:transparent;border:0;cursor:pointer}
+.airport-dot{position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#102e49;border:3px solid #79edff;box-shadow:0 0 0 3px #102a42,0 1px 10px #000;}
+.sat-airport-label{position:absolute;white-space:nowrap;color:#fff;font-size:12px;font-weight:750;line-height:1.25;text-shadow:0 1px 3px #000,1px 1px 3px #000,-1px -1px 3px #000;background:rgba(7,27,43,.78);border:1px solid #42708c;border-radius:5px;padding:3px 5px;pointer-events:auto;}
+.sat-airport-label small{font-size:10px;color:#b8e8fa}
+.aviation-airport-icon:hover .airport-dot,.active-airport .airport-dot{border-color:#ffd46b;box-shadow:0 0 0 4px #18354d,0 0 14px #ffd46b}
+.aviation-airport-icon:hover .sat-airport-label,.active-airport .sat-airport-label{border-color:#ffd46b;color:#ffdf85}
+.map-error{color:#ffd29b}
+@media(max-width:650px){#map{height:570px}.sat-airport-label{font-size:10px;padding:2px 3px}.sat-airport-label small{font-size:9px}}
+
+/* V5: Leaflet must control its own tile sizes and marker overlays. */
+#map .leaflet-tile{width:256px;height:256px;max-width:none;max-height:none}
+#map .leaflet-marker-pane{z-index:600}
+#map .leaflet-tile-pane{z-index:200}
+#map .leaflet-control-container{z-index:800}
+
+/* V6 single-image map: an image and its pin layer share one exact rectangle. */
+#map.single-image-map{position:relative;width:100%;max-width:710px;height:auto;aspect-ratio:1200/1260;margin:0 auto;overflow:hidden;background:#10283b;border-radius:12px;touch-action:pan-y}
+#map.single-image-map .taiwan-satellite-image{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none;user-select:none}
+#map.single-image-map .airport-marker-layer{position:absolute;inset:0;z-index:2}
+#map.single-image-map .sat-pin{position:absolute;z-index:3;display:block;width:20px;height:20px;padding:0;margin:0;transform:translate(-50%,-50%);border:0;background:transparent;overflow:visible;cursor:pointer}
+#map.single-image-map .sat-pin-dot{display:block;width:16px;height:16px;border-radius:50%;border:3px solid #8cecff;background:#072d47;box-shadow:0 0 0 2px #10263e,0 1px 9px #000}
+#map.single-image-map .sat-pin.active-airport .sat-pin-dot,#map.single-image-map .sat-pin:focus-visible .sat-pin-dot{border-color:#ffd36c;background:#bb6618;box-shadow:0 0 0 3px #172a41}
+#map.single-image-map .sat-pin-label{position:absolute;display:block;min-width:max-content;padding:3px 5px;border-radius:5px;background:rgba(4,20,35,.82);border:1px solid rgba(165,214,237,.5);color:#fff;font-size:12px;font-weight:600;line-height:1.3;text-align:left;pointer-events:none;text-shadow:0 1px 2px #000}
+#map.single-image-map .sat-pin-label small{color:#aee7ff;font-size:10px}
+#map.single-image-map.satellite-unavailable{background:linear-gradient(145deg,#17415c,#0a2339)}
+@media(max-width:680px){#map.single-image-map .sat-pin-label{font-size:9px;padding:2px 3px}#map.single-image-map .sat-pin-label small{font-size:8px}}
+
+
+/* Mobile: keep all airport names within the satellite image. */
+#map.single-image-map .mobile-airport-label{display:none}
+@media(max-width:680px){
+ #map.single-image-map{width:100%;max-width:100%;}
+ #map.single-image-map .sat-pin{width:28px;height:28px;display:flex;align-items:center;justify-content:center;z-index:4}
+ #map.single-image-map .sat-pin-dot{width:15px;height:15px;flex-shrink:0}
+ #map.single-image-map .sat-pin-label{display:none}
+ #map.single-image-map .mobile-airport-label{display:block;position:absolute;z-index:3;transform:translate(-50%,-50%);padding:2px 4px;white-space:nowrap;font-size:9px;line-height:1.2;font-weight:700;color:#f4fbff;background:rgba(4,20,35,.85);border:1px solid rgba(165,214,237,.65);border-radius:4px;pointer-events:none;text-shadow:0 1px 2px #000}
+ #map.single-image-map .mobile-airport-label.active-airport{color:#ffdf85;border-color:#ffd36c}
+}
