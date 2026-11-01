@@ -49,3 +49,15 @@
 #map.single-image-map .sat-pin-label small{color:#aee7ff;font-size:10px}
 #map.single-image-map.satellite-unavailable{background:linear-gradient(145deg,#17415c,#0a2339)}
 @media(max-width:680px){#map.single-image-map .sat-pin-label{font-size:9px;padding:2px 3px}#map.single-image-map .sat-pin-label small{font-size:8px}}
+
+
+/* Mobile: keep all airport names within the satellite image. */
+#map.single-image-map .mobile-airport-label{display:none}
+@media(max-width:680px){
+ #map.single-image-map{width:100%;max-width:100%;}
+ #map.single-image-map .sat-pin{width:28px;height:28px;display:flex;align-items:center;justify-content:center;z-index:4}
+ #map.single-image-map .sat-pin-dot{width:15px;height:15px;flex-shrink:0}
+ #map.single-image-map .sat-pin-label{display:none}
+ #map.single-image-map .mobile-airport-label{display:block;position:absolute;z-index:3;transform:translate(-50%,-50%);padding:2px 4px;white-space:nowrap;font-size:9px;line-height:1.2;font-weight:700;color:#f4fbff;background:rgba(4,20,35,.85);border:1px solid rgba(165,214,237,.65);border-radius:4px;pointer-events:none;text-shadow:0 1px 2px #000}
+ #map.single-image-map .mobile-airport-label.active-airport{color:#ffdf85;border-color:#ffd36c}
+}
